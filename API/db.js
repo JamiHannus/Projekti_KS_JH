@@ -5,8 +5,8 @@ try{
         connectionLimit : 10,
         host            : 'localhost',
         user            : 'root',
-        password        : 'databases',
-        database        : 'projekti'
+        password        : 'Databases2',
+        database        : 'mydb'
     });
 
 } catch (error) {
