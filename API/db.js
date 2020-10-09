@@ -5,7 +5,7 @@ try {
     connectionLimit: 10,
     host: "localhost",
     user: "root",
-    password: "Databases2",
+    password: "ja1993mi",
     database: "mydb",
   });
 } catch (error) {
