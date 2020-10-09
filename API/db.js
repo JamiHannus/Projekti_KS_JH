@@ -1,37 +1,34 @@
-let mysql = require('mysql');
-let pool = null
-try{
-    pool = mysql.createPool({
-        connectionLimit : 10,
-        host            : 'localhost',
-        user            : 'root',
-        password        : 'Databases2',
-        database        : 'mydb'
-    });
-
+let mysql = require("mysql");
+let pool = null;
+try {
+  pool = mysql.createPool({
+    connectionLimit: 10,
+    host: "localhost",
+    user: "root",
+    password: "Databases2",
+    database: "mydb",
+  });
 } catch (error) {
-    console.error('Mysql pool create failed');
-    console.error(error);
+  console.error("Mysql pool create failed");
+  console.error(error);
 }
 
 const api = {
-    query: (query, ...parameters) =>
-    {
-        let promise = new Promise(function(resolve, reject) {
-            pool.query(query, ...parameters, (error, results, fields) => {
-                if(error) {
-                    reject(error)
-                };
-
-                resolve(results);
-            })
+  query: (query, ...parameters) => {
+    let promise = new Promise(function (resolve, reject) {
+      pool.query(query, ...parameters, (error, results, fields) => {
+        if (error) {
+          reject(error);
         }
-        );
-        return promise;
-    },
-    closeAll: () => {
-        pool.end();
-    }
+
+        resolve(results);
+      });
+    });
+    return promise;
+  },
+  closeAll: () => {
+    pool.end();
+  },
 };
 
 module.exports = api;
