@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import LogIn from './components/LogIn';
+import InfoCardList from './components/InfoCardList'
 import Stations from './components/Stations';
 
 class App extends Component {
@@ -11,6 +12,9 @@ class App extends Component {
       <div>
         <div>
           {/* <Stations /> */}
+          <div>
+            <InfoCardList />
+          </div>
           <div>
             <LogIn></LogIn>
           </div>
@@ -23,12 +27,11 @@ class App extends Component {
         <InfoWindow onClose={this.onInfoWindowClose}>
         </InfoWindow>
       </Map>
-    </div>
+    </div> 
     );
   }
-
 }
 
 export default GoogleApiWrapper({
-  apiKey: ("AIzaSyCMqc8MsAIPHk83Y_ED7jQDCR0179SMROc")
-})(App)
+  apiKey: "AIzaSyCMqc8MsAIPHk83Y_ED7jQDCR0179SMROc",
+})(App);
