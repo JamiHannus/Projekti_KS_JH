@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 
 class Stations extends React.Component {
-        state = {
+      /*  state = {
             items: []
         };
         
