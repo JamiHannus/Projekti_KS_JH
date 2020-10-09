@@ -1,11 +1,12 @@
-import React, { Component, useState } from 'react';
-import './App.css';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import LogIn from './components/LogIn';
-import InfoCardList from './components/InfoCardList'
-import Stations from './components/Stations';
-import axios from 'axios'
 
+import React, { Component, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import MapContainer from "./components/MapContainer";
+import LogIn from "./components/LogIn";
+import InfoCardList from "./components/InfoCardList";
+import axios from 'axios'
+import Stations from './components/Stations';
 class App extends Component {
     constructor(props)
     {
@@ -45,23 +46,16 @@ class App extends Component {
             <InfoCardList />
           </div>
           <div>
-            <LogIn></LogIn>
+            <LogIn />
+          </div>
+          <div>
+            <MapContainer />
           </div>
         </div>
-        <Map google={this.props.google} zoom={14}>
-  
-        <Marker onClick={this.onMarkerClick}
-                name={'Current location'} />
+      </div>
 
-        <InfoWindow onClose={this.onInfoWindowClose}>
-        </InfoWindow>
-      </Map>
-    </div> 
     );
   }
 }
+export default App;
 
-
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyCMqc8MsAIPHk83Y_ED7jQDCR0179SMROc",
-})(App);
