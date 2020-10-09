@@ -5,8 +5,7 @@ const itemComponent = require('./components/items');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./db');
-
-const customHeaderCheckerMiddleware = function(req, res, next) {
+/*const customHeaderCheckerMiddleware = function(req, res, next) {
   console.log('Middleware is active!');
   if(req.headers['custom-header-param'] === undefined)
   {
@@ -15,7 +14,7 @@ const customHeaderCheckerMiddleware = function(req, res, next) {
 
   // pass the control to the next handler in line
   next();
-}
+}*/
 
 app.use(bodyParser.json());
 app.use(cors()) 
@@ -23,10 +22,18 @@ app.use(cors())
 
 app.use('/items', itemComponent);
 
+/*app.route('/items')
+    .get((req,res) => res.send('test'))
+*/
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+
+
+  app.listen(port, () => {
+    console.log(`Example API listening on http://localhost:${port}\n`);
+    console.log('testi');
+    console.log('/items [GET]');
+  });
