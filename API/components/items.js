@@ -3,9 +3,9 @@ const db = require('../db');
 const router = express.Router();
 
 //return product details
-router.get('/items', (req, res) => {
+router.get('/', (req, res) => {
     db.query('SELECT * FROM charge_station_data').then(results => {
-        res.json({stations: results})
+        res.json({items: results})
     })
     .catch(() => {
         res.sendStatus(500);
