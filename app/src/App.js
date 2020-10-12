@@ -4,11 +4,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MapContainer from "./components/MapContainer";
 import LogIn from "./components/LogIn";
-import Testi from "./components/testi";
+import InfoCardList from "./components/InfoCardList";
 import axios from 'axios';
 import Stations from './components/Stations';
-
+import Card from "react-bootstrap/Card";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from "react-bootstrap/Col";
 export default function App() {
+
 
     const [items, setItems] = useState([]);
 
@@ -22,21 +26,18 @@ export default function App() {
 
   let output = 
       <>
-      <div>
-        <div>
-          {/* <Stations /> */}
-          <div>
-            <Testi items={items}/>
-          </div>
-          <div>
-           <LogIn />
-          </div>
-          <div>
-            <MapContainer />
-          </div>
-        </div>
-      </div>
-
+      <Container fluid ={true}>
+        <Row>
+            <Col><LogIn /></Col>
+        </Row>
+        <Row noGutters ={true}	>
+          <Col xs = "auto" className="testCol"> 
+             <InfoCardList items={items}/>
+          </Col >
+       <Col xs={13}>  <MapContainer /></Col>  
+        </Row>
+        <Row> <Col>profile here?</Col></Row>
+      </Container>
       </>
     return(
       <>

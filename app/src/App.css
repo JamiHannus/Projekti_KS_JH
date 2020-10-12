@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 } */
+.testCol {
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 0%;
+}
+#root {
+  border: 0;
+}
