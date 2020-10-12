@@ -1,52 +1,35 @@
 
-import React, { Component, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MapContainer from "./components/MapContainer";
 import LogIn from "./components/LogIn";
-import InfoCardList from "./components/InfoCardList";
-import axios from 'axios'
+import Testi from "./components/testi";
+import axios from 'axios';
 import Stations from './components/Stations';
-class App extends Component {
-    constructor(props)
-    {
-      super(props);
-          this.state = {
-          items: [],
-      };
-    }
-    componentDidMount() {
+
+export default function App() {
+
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
         axios.get('http://localhost:4000/items')
-        .then(res => {
-            this.setState({ items: res.data });
+        .then((response) => {
+            setItems(response.data.items)
         });
-      }
-      checkMount(){
-      this.setState({items:!this.state.items,}, function () {
-        this.props.updateItem(this.state);
-      }.bind(this));
-      }
-  render () {
-    /*const [testi, setTest] = useState({items})
-    {testi.map((testi) => {
-      return (
-      console.log(testi = {testi}) 
-      )}) 
-  }*/
-    return(
+      });
+      
+
+  let output = 
+      <>
       <div>
         <div>
-          <ul>
-            {this.state.items.map(item => (
-              <li key={item.station_data}>{item}</li>
-            ))}
-          </ul>
           {/* <Stations /> */}
           <div>
-            <InfoCardList />
+            <Testi items={items}/>
           </div>
           <div>
-            <LogIn />
+           <LogIn />
           </div>
           <div>
             <MapContainer />
@@ -54,8 +37,10 @@ class App extends Component {
         </div>
       </div>
 
-    );
+      </>
+    return(
+      <>
+       {output}
+      </>
+    )
   }
-}
-export default App;
-
