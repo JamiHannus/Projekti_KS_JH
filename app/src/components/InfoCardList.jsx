@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MainInfoCard from "./MainInfoCard";
 
-export default function InfoCardList() {
+/*export default function InfoCardList() {
   const SAMPLE_CARDS = [
     {
       id: 1,
@@ -35,4 +35,15 @@ export default function InfoCardList() {
       })}
     </div>
   );
+}
+*/
+export default function InfoCardList(props) {
+  return(
+    <div>
+      <div>{ props.Type }</div>
+      <div>{ props.lattitude }</div>
+      <div>{ props.longitude }</div>
+      <div>{ props.description }</div>
+    </div>
+  )
 }

@@ -1,32 +1,46 @@
-import React, { Component, useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MapContainer from "./components/MapContainer";
 import LogIn from "./components/LogIn";
-import InfoCardList from "./components/InfoCardList";
-import Users from "./components/Users";
+import Testi from "./components/testi";
+import axios from 'axios';
+import Stations from './components/Stations';
 
-class App extends Component {
-  render() {
-    return (
+export default function App() {
+
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:4000/items')
+        .then((response) => {
+            setItems(response.data.items)
+        });
+      });
+      
+
+  let output = 
+      <>
       <div>
         <div>
+          {/* <Stations /> */}
           <div>
-            <Users />
+            <Testi items={items}/>
           </div>
           <div>
-            <InfoCardList />
-          </div>
-          <div>
-            <LogIn />
+           <LogIn />
           </div>
           <div>
             <MapContainer />
           </div>
         </div>
       </div>
-    );
-  }
-}
 
-export default App;
+      </>
+    return(
+      <>
+       {output}
+      </>
+    )
+  }
