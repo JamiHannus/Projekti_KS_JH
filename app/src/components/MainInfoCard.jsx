@@ -3,16 +3,16 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
-const MainInfoCard = ({ testcard }) => {
-  return (
-    <div>
-      <Card style={{ width: "18rem" }}>
+
+export default function MainInfoCard(props) {
+  return (  
+          <Card style={{ width: "18rem" }}>
         <Card.Body>
-          <Card.Title>ID{testcard.id}</Card.Title>
+          <Card.Title>ID{props.station_data}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            Type = price {testcard.type}
+            Type = price {props.Type}
           </Card.Subtitle>
-          <Card.Text> {testcard.desc}</Card.Text>
+          <Card.Text> {props.description}</Card.Text>
           <div>
             <ButtonGroup aria-label="Basic example">
               <Button variant="success">Start</Button>
@@ -22,8 +22,7 @@ const MainInfoCard = ({ testcard }) => {
           <div>Here be the Counting price?</div>
         </Card.Body>
       </Card>
-    </div>
   );
 };
 
-export default MainInfoCard;
+

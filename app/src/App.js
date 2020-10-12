@@ -1,50 +1,47 @@
-import React, { Component, useState } from "react";
-import ReactDOM from "react-dom";
+
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MapContainer from "./components/MapContainer";
 import LogIn from "./components/LogIn";
 import InfoCardList from "./components/InfoCardList";
+import axios from 'axios';
+import Stations from './components/Stations';
+import Card from "react-bootstrap/Card";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from "react-bootstrap/Col";
+export default function App() {
 
-import axios from "axios";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      loading :true,
-    };
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:4000/items')
+        .then((response) => {
+            setItems(response.data.items)
+        });
+      });
+      
+
+  let output = 
+      <>
+      <Container fluid ={true}>
+        <Row>
+            <Col><LogIn /></Col>
+        </Row>
+        <Row noGutters ={true}	>
+          <Col xs = "auto" className="testCol"> 
+             <InfoCardList items={items}/>
+          </Col >
+       <Col xs={13}>  <MapContainer  items={items} /></Col>  
+        </Row>
+        <Row> <Col>profile here?</Col></Row>
+      </Container>
+      </>
+    return(
+      <>
+       {output}
+      </>
+    )
   }
-  
- async componentDidMount() {
-   const response = await axios.get("http://localhost:4000/items");
-    const json = response;
-    this.setState({data: json});
-    console.log(this.state.data);
-  }  
-  
-
- 
-  render() {
-    return (
-      <div>
-        <div>
-          <div>
-          </div>
-          <div>
-            <InfoCardList dataFromParent={this.state.data}/>
-          </div>
-          <div>
-            <LogIn />
-          </div>
-          <div>
-            <MapContainer />
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-export default App;
