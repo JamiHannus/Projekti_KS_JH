@@ -34,7 +34,7 @@ export default function App() {
           <Col xs = "auto" className="testCol"> 
              <InfoCardList items={items}/>
           </Col >
-       <Col xs={13}>  <MapContainer /></Col>  
+       <Col xs={13}>  <MapContainer  items={items} /></Col>  
         </Row>
         <Row> <Col>profile here?</Col></Row>
       </Container>

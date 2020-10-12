@@ -1,5 +1,6 @@
 import React from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import MapMarkers from "./MapMarkers"
 
 const containerStyle = {
   position: "relative",
@@ -7,11 +8,12 @@ const containerStyle = {
   height: "85%",
   
 };
-const FINLAND_BOUNDS = {
-  sw: { lat: 59.667741, lng: 20.273783 },
-  ne: { lat: 70.170201, lng: 33.905926 },
-};
+var FINLAND_BOUNDS = [{lat: 59.667741, lng: 20.273783}, {lat: 70.170201, lng: 33.905926}]
+
+
+
 export class MapContainer extends React.Component {
+  
   render() {
     return (
         <Map
@@ -22,10 +24,14 @@ export class MapContainer extends React.Component {
             lat: 65.012615,
             lng: 25.471453,
           }}
+          //  something dosent work on bound
           LatLngBounds={FINLAND_BOUNDS}
         >
           <Marker onClick={this.onMarkerClick} name={"Current location"} />
           <InfoWindow onClose={this.onInfoWindowClose}></InfoWindow>
+          {/* Have the map markers generated from the map function? */}
+          { this.props.items.map(item => (<MapMarkers key={item.station_data}{...item} ></MapMarkers>))}
+        
         </Map>
       
     );
