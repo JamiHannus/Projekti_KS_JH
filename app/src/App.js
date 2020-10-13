@@ -7,10 +7,10 @@ import LogIn from "./components/LogIn";
 import InfoCardList from "./components/InfoCardList";
 import axios from 'axios';
 import Stations from './components/Stations';
-import Card from "react-bootstrap/Card";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from "react-bootstrap/Col";
+
 export default function App() {
 
 
