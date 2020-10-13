@@ -13,9 +13,13 @@ var FINLAND_BOUNDS = [{lat: 59.667741, lng: 20.273783}, {lat: 70.170201, lng: 33
 
 
 export class MapContainer extends React.Component {
-  
-  render() {
+  shouldComponentUpdate(nextProps)
+   {
+    return false;
+    }
+  render() {{console.log(this.props.items)}
     return (
+      
         <Map
           google={this.props.google}
           zoom={12}
@@ -25,13 +29,17 @@ export class MapContainer extends React.Component {
             lng: 25.471453,
           }}
           //  something dosent work on bound
-          LatLngBounds={FINLAND_BOUNDS}
+          // LatLngBounds={FINLAND_BOUNDS}
         >
           <Marker onClick={this.onMarkerClick} name={"Current location"} />
-          <InfoWindow onClose={this.onInfoWindowClose}></InfoWindow>
-          {/* Have the map markers generated from the map function? */}
-          { this.props.items.map(item => (<MapMarkers key={item.station_data}{...item} ></MapMarkers>))}
-        
+           { this.props.items.map((test) =>(
+             <Marker
+              key= {test.station_data}
+              position={{
+              lat: test.lattitude,
+              lng: test.longitude}} 
+              />
+           ))} 
         </Map>
       
     );
