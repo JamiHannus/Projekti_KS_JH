@@ -1,6 +1,6 @@
 import React from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import MapMarkers from "./MapMarkers"
+
 
 const containerStyle = {
   position: "relative",
