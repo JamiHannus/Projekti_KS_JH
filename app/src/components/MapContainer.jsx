@@ -9,14 +9,46 @@ const containerStyle = {
 };
 
 export class MapContainer extends React.Component {
-  shouldComponentUpdate(nextProps)
-   {
-    return false;
+  state = {
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {},
+    test:false,
+  };
+  onMarkerClick = (props, marker, e) =>
+  this.setState({
+    selectedPlace: props,
+    activeMarker: marker,
+    showingInfoWindow: true,
+    test:true
+  });
+onMapClicked = (props) => {
+  console.warn("hello");
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null,
+        test:false,
+        })
     }
+    else this.setState({test :false})
+  };
+// something renders the map too much now it only renders when clicked on it
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.test === nextState.test) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  
   render() {
+    console.warn(this.props);
     return (
       
         <Map
+          onClick={this.onMapClicked}
           google={this.props.google}
           zoom={12}
           style={containerStyle}
@@ -26,14 +58,24 @@ export class MapContainer extends React.Component {
           }}
             >
           <Marker onClick={this.onMarkerClick} name={"Current location"} />
+          <Marker onClick={this.onMarkerClick} name={"test"} />
            { this.props.items.map((test) =>(
              <Marker
+              onClick={this.onMarkerClick}
               key= {test.station_data}
               position={{
               lat: test.lattitude,
               lng: test.longitude}} 
+              name={test.description}
               />
            ))} 
+             <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+        </InfoWindow>
         </Map>
       
     );
