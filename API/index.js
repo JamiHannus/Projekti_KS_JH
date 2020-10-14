@@ -11,14 +11,9 @@ const db = require('./db');
   {
       return res.status(400).json({ reason: "custom-header-param header missing"});
   }
-
   // pass the control to the next handler in line
   next();
-<<<<<<< HEAD
-};
-=======
 }*/
->>>>>>> c42f8ff24f14582d1f5d48a21edea100ee44c078
 
 app.use(bodyParser.json());
 app.use(cors());

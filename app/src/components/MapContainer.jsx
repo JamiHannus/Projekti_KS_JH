@@ -1,6 +1,5 @@
 import React from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import MapMarkers from "./MapMarkers"
 
 const containerStyle = {
   position: "relative",
@@ -8,15 +7,48 @@ const containerStyle = {
   height: "85%",
   
 };
-var FINLAND_BOUNDS = [{lat: 59.667741, lng: 20.273783}, {lat: 70.170201, lng: 33.905926}]
-
-
 
 export class MapContainer extends React.Component {
+  state = {
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {},
+    test:false,
+  };
+  onMarkerClick = (props, marker, e) =>
+  this.setState({
+    selectedPlace: props,
+    activeMarker: marker,
+    showingInfoWindow: true,
+    test:true
+  });
+onMapClicked = (props) => {
+  console.warn("hello");
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null,
+        test:false,
+        })
+    }
+    else this.setState({test :false})
+  };
+// something renders the map too much now it only renders when clicked on it
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.test === nextState.test) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   
   render() {
+    console.warn(this.props);
     return (
+      
         <Map
+          onClick={this.onMapClicked}
           google={this.props.google}
           zoom={12}
           style={containerStyle}
@@ -24,14 +56,26 @@ export class MapContainer extends React.Component {
             lat: 65.012615,
             lng: 25.471453,
           }}
-          //  something dosent work on bound
-          LatLngBounds={FINLAND_BOUNDS}
-        >
+            >
           <Marker onClick={this.onMarkerClick} name={"Current location"} />
-          <InfoWindow onClose={this.onInfoWindowClose}></InfoWindow>
-          {/* Have the map markers generated from the map function? */}
-          { this.props.items.map(item => (<MapMarkers key={item.station_data}{...item} ></MapMarkers>))}
-        
+          <Marker onClick={this.onMarkerClick} name={"test"} />
+           { this.props.items.map((test) =>(
+             <Marker
+              onClick={this.onMarkerClick}
+              key= {test.station_data}
+              position={{
+              lat: test.lattitude,
+              lng: test.longitude}} 
+              name={test.description}
+              />
+           ))} 
+             <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+        </InfoWindow>
         </Map>
       
     );
