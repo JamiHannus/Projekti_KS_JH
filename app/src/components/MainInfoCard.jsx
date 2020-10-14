@@ -35,7 +35,6 @@ export default function MainInfoCard(props) {
                 }} variant="danger">Stop</Button>
             </ButtonGroup>
           </div>
-          <div>Here be the Counting price?</div>
         </Card.Body>
       </Card>
   );

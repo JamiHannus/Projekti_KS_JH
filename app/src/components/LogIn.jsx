@@ -37,15 +37,19 @@ export default class LogIn extends React.Component {
         errorMsg: "please enter both fields",
         succMsg: "",
       });
-    } else {
-      //Post here -> check if psw and user name match
-      this.setState({ succMsg: "welcome", errorMsg: "" });
+    }
+    if( this.state.username === "ADMIN"&& this.state.password ==="ADMIN1") 
+    {
+       //Should send to back end and compare password and user name if returns true allow log in
+      this.setState({ succMsg: "welcome ,ADMIN ", errorMsg: "" });
+    } 
+    if( this.state.username !== "ADMIN"&& this.state.password !=="ADMIN1") 
+     {
+     this.setState({succMsg: "", errorMsg:"Wrong password. try ADMIN and ADMIN1"})
     }
   }
 
   reset() {
-    let username = this.state.username;
-    let password = this.state.password;
     this.setState({
       username: "",
       password: "",
