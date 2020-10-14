@@ -3,18 +3,20 @@
 export function Price(price,startTime)
  {
    let endTime =Date.now();
-   let totalTime = Math.floor((endTime - startTime)/1000);
+   let totalTime = Math.ceil((endTime - startTime)/1000);
    let totalPrice
    let chargePrice
    let powerUsage
     if (price === 1 ){
-       alert( "this charging staion was free of use. You used this for "+totalTime+ " seconds" )
+       alert( "This charging station was free of use. You used this for "+totalTime+ " seconds" )
+       //Here we could have the POST to api
       }
     if (price ===  "2"){
         // 20 cents per minute
         chargePrice = (20/60)
         totalPrice = (totalTime * chargePrice).toPrecision(3)
-        alert( totalPrice +" cents")
+        alert("This station was billed by time used (20cents /minute )  for total cost of "+ totalPrice +" in cents")
+         //Here we could have the POST to api
 
     }
     if (price === "3"){
@@ -23,7 +25,8 @@ export function Price(price,startTime)
       // between 9 - 27 euros per hour. Divide by 3600 to get seconds time
       chargePrice = (powerUsage*18) /3600
       totalPrice = (totalTime * chargePrice).toPrecision(3)
-      alert( "Your car was charged with input of "+powerUsage+" Kw during the charge "+ totalPrice + " is total price cents")
+      alert( "Your car was using "+powerUsage+" Kw and it cost "+ totalPrice + " in cents")
+       //Here we could have the POST to api
     }
     
 }

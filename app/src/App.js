@@ -38,7 +38,7 @@ export default function App() {
   let output = 
       <>
       
-    <Container fluid ={true}>
+    <Container fluid ={true} className="containerTest">
         <Row>
             <Col>
             {/* Here is the Login import */}
@@ -47,16 +47,13 @@ export default function App() {
         </Row>
         {/* Here is the card stack */}
         <Row noGutters ={true}>
-          <Col xs = "auto" className="testCol"> 
+          <Col xs = {4} className="testCol"> 
              <InfoCardList items={items}/>
           </Col >
           {/* Map starts here */}
-          <Col xs={13}>
+          <Col xs={18} >
             <MapContainer  items={items} /></Col>  
         </Row>
-          <Row>
-             <Col>profile here?</Col>
-          </Row>
     </Container>
       </>
     return(
